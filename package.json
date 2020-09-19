@@ -1,17 +1,12 @@
 {
-  "name": "portfolio",
+  "name": "Development",
   "version": "1.0.0",
-  "description": "Vladimir.pt Portfolio",
+  "description": "Base front-end dev setup",
   "main": "gulpfile.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [
-    "Vladimir",
-    "Lisovets",
-    "vladimir.pt",
-    "Portfolio"
-  ],
+  "keywords": [],
   "author": "Vladimir Lisovets",
   "license": "ISC",
   "devDependencies": {
