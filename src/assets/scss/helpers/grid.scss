@@ -1,0 +1,13 @@
+
+  $grid: 24;
+  $breakpoints: ( "xs":300px, "s": 601px, "m": 993px, "l" : 1201px, "xl" : 1800px);
+
+  @each $breakpoint, $size in $breakpoints {
+    @media only screen and (min-width : #{$size}) {
+      @for $i from 1 through $grid {
+        .col.#{$breakpoint}-#{$i} {
+          width: 100%/$i;
+        }
+      }
+    }
+  }
