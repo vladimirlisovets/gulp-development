@@ -14,12 +14,15 @@
 
   var js_files = ['src/assets/js/main.js', 'src/assets/js/home.js'];
 
+  var bs = require('browser-sync').create(); // create a browser sync instance.
+
   // HTML related
 
   gulp.task('html', async function () {
   gulp.src('src/*.html')
   .pipe(minifyHtml())
-  .pipe(gulp.dest('dist/'));
+  .pipe(gulp.dest('dist/'))
+  .pipe(bs.reload({stream: true}));
   });
 
   // Styling related
@@ -32,7 +35,8 @@
   .pipe(concat('custom.css'))
   .pipe(sourcemaps.init())
   .pipe(sourcemaps.write('.'))
-  .pipe(gulp.dest('dist/assets/css/'));
+  .pipe(gulp.dest('dist/assets/css/'))
+  .pipe(bs.reload({stream: true}));
   });
 
   gulp.task('css', function () {
@@ -42,7 +46,8 @@
   .pipe(sourcemaps.init())
   .pipe(postcss([ autoprefixer() ]))
   .pipe(sourcemaps.write('.'))
-  .pipe(gulp.dest('dist/assets/css/'));
+  .pipe(gulp.dest('dist/assets/css/'))
+  .pipe(bs.reload({stream: true}));
   });
 
   // Javascript related
@@ -69,6 +74,7 @@
     ]
   })
   ])).pipe(gulp.dest('dist/assets/media/images/'))
+  .pipe(bs.reload({stream: true}));
   });
 
   // Watching tasks
@@ -85,6 +91,14 @@
   gulp.watch('src/*.html', gulp.series('html'));
   });
 
+  gulp.task('browser-sync', function() {
+      bs.init({
+          server: {
+              baseDir: "dist/"
+          }
+      });
+  });
+
   // Default task
 
-  gulp.task('default', gulp.series('sass:watch', 'image:watch', 'html:watch'));
+  gulp.task('default', gulp.series('sass:watch', 'image:watch', 'html:watch', 'browser-sync'));
